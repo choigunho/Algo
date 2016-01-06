@@ -1,4 +1,5 @@
 
+
 public enum Animal {
 
 	CAT("야옹", "나비"), DOG("멍멍", "바둑이"), BIRD("짹짹", "참새");
