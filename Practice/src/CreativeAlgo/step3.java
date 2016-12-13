@@ -1,4 +1,4 @@
-package study;
+package CreativeAlgo;
 
 public class step3 {
 

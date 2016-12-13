@@ -13,9 +13,10 @@ public class vaccine {
 	static int map[][];
 	static int minDepth;
 	
+	
 	public static void main(String args[]) throws Exception {
 		
-		System.setIn(new FileInputStream("C:\\vaccine.txt"));	
+		System.setIn(new FileInputStream("C:\\vaccine.txt"));
 		Scanner sc = new Scanner(System.in);
 		
 		int T = sc.nextInt();
@@ -38,7 +39,7 @@ public class vaccine {
 			
 			for(int i=1; i<=totalPerson; i++) {
 				int currentPerson = i;
-				int startDepth = 2;
+				int startDepth = 1;
 				
 				q.add(new int[]{currentPerson, startDepth});
 				personContainer.add(currentPerson);
@@ -66,7 +67,7 @@ public class vaccine {
 			
 			if(personContainer.size() == totalPerson) {
 				q.clear();
-				return arr[1];
+				return arr[1] + 1;
 			}
 
 			// 연결된 사람들을 큐에 넣는다.			
