@@ -1,106 +1,85 @@
 package study;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.*;
 
 public class vaccine {
 
-	static int N;
-	static int M;
-	static int Answer;
-	static ArrayList<Integer>[] rel;
-	static HashSet<Integer> setPerson = new HashSet<Integer>();
-	
-	static ArrayList<Integer> debug = new ArrayList<Integer>();
-	
-	public static void main(String[] args) throws Exception{
-		System.setIn(new FileInputStream("c:\\vaccine.txt"));
+	static int totalPerson;
+	static int networkCount;
 
+	static List<Integer> personContainer = new ArrayList<>();
+	static Queue<int[]> q = new LinkedList<int[]>();
+	static int map[][];
+	static int minDepth;
+	
+	public static void main(String args[]) throws Exception {
+		
+		System.setIn(new FileInputStream("C:\\vaccine.txt"));	
 		Scanner sc = new Scanner(System.in);
-
-		int T = sc.nextInt(); // 테스트케이스 읽기
-
-		for (int test_case = 1; test_case <= T; ++test_case) {
-
-			/******************************************************/
-
-			// 이 곳에 알고리즘을 구현합니다.
-
-			/******************************************************/
-			// 입력
-			Answer = solve(sc);
-			// 출력
-
-			System.out.printf("#%d %d\n", test_case, Answer);
-		}
 		
-		sc.close();
-	}
-
-	public static int solve(Scanner sc) {
-		N = sc.nextInt();
-		M = sc.nextInt();
-//		Marr = new int[N + 1][N + 1];
-		int minDepth = N;
+		int T = sc.nextInt();
 		
-		rel = new ArrayList[N + 1];
-		for (int i=0; i<=N; i++)
-			rel[i] = new ArrayList<Integer>();
-		
-		for (int i=0; i < M; i++)
-		{
-			int a = sc.nextInt();
-			int b = sc.nextInt();
+		for(int testCase = 0; testCase < T; testCase++) {
 			
-			rel[a].add(b);
-			rel[b].add(a);
-		}
-		
-		for (int i=1; i<=N; i++)
-		{
-			setPerson.clear();
-			rel[0].clear();
-			rel[0].add(i);
+			totalPerson = sc.nextInt();
+			networkCount = sc.nextInt();
 			
-			int depth = maketree(0, 0);
-			minDepth = (minDepth > depth) ? depth : minDepth;
+			// create map
+			map = new int[totalPerson+1][totalPerson+1];
+			
+			for(int i=0; i<networkCount; i++) {
+				int row = sc.nextInt();
+				int col = sc.nextInt();
+				map[row][col] = map[col][row] = 1;
+			}
+			
+			minDepth = 999;
+			
+			for(int i=1; i<=totalPerson; i++) {
+				int currentPerson = i;
+				int startDepth = 2;
 				
+				q.add(new int[]{currentPerson, startDepth});
+				personContainer.add(currentPerson);
+				
+				System.out.println("=============");
+				int tmpDepth = queue(currentPerson);
+				System.out.println("minDepth: " + tmpDepth);
+				
+				if(minDepth > tmpDepth) {
+					minDepth = tmpDepth;
+				}
+				personContainer.clear();
+			}
 			
+			System.out.println("#" + testCase + " " + minDepth);
 		}
 		
-		return minDepth;
 	}
 
-	private static int maketree(int i, int level) {
-		int depth = level;
-		ArrayList<Integer> child = new ArrayList<Integer>();
-		Set<Integer> newPerson = new HashSet<Integer>(); 
+	public static int queue(int startPerson) {
 		
-		
-		newPerson.addAll(rel[i]);
-		newPerson.removeAll(setPerson);
-		
-		setPerson.addAll(rel[i]);
-		debug.add(i);
-		
-		
-		if (setPerson.size() != N)
-		{
-			Iterator p = newPerson.iterator();
+		while(true) {
 			
-			while(p.hasNext())
-			{
-				depth = maketree((int)p.next(), level + 1);
-				break;
+			int[] arr = q.remove();
+			
+			if(personContainer.size() == totalPerson) {
+				q.clear();
+				return arr[1];
+			}
+
+			// 연결된 사람들을 큐에 넣는다.			
+			for(int i=1; i<totalPerson+1; i++) {
+				
+				if(map[arr[0]][i] == 1 && !personContainer.contains(i)) {
+					System.out.println("current: " + arr[0] + ", connected: " + i + ", depth: " + arr[1]);
+					
+					personContainer.add(i);
+					q.add(new int[]{i, arr[1] + 1});
+				}
 			}
 		}
-		else
-			System.out.println("*** PATH" + debug.toString());
-		
-		
-		debug.remove(debug.size() - 1);
-		return depth;
 	}
 
 }
