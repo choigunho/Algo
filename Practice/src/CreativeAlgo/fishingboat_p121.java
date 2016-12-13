@@ -2,36 +2,45 @@ package CreativeAlgo;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.ObjectInputStream.GetField;
-import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class fishingboat_p121 {
 
-	static int totalPerson;
-	static int networkCount;
 	static int Answer;
 
-	static List<Integer> personContainer = new ArrayList<>();
-	static Queue<int[]> q = new LinkedList<int[]>();
-	static int map[][];
-	
 	public static void main(String args[]) throws Exception {
 		
 //		System.setIn(new FileInputStream("C:\\vaccine.txt"));
-//		System.setIn(new FileInputStream("res/fishingboat.txt"));
+		System.setIn(new FileInputStream(new File("").getAbsolutePath() + "\\res\\fishingboat.txt"));
 		
-//		Scanner sc = new Scanner(System.in);
-//		int T = sc.nextInt();
-//		
-//		for(int testCase = 0; testCase < T; testCase++) {
-//			
-//			System.out.println("#" + testCase + " " + Answer);
-//		}
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+		
+		for(int testCase = 0; testCase < T; testCase++) {
+			
+			int pondSize = sc.nextInt(); // 6
+			int fishingNet = sc.nextInt(); // 3
+			
+			int[] pond = new int[pondSize];
+			for(int i=0; i<pondSize; i++) {
+				pond[i] = sc.nextInt();
+			}
+			
+			int caughtFish = 0;
+			for(int i=0; i<=pondSize-fishingNet; i++) { // 6-3
+				
+				int total = 0;
+				for(int j=0; j<fishingNet; j++) {		
+					total += pond[i+j];
+				}
+				
+				if(caughtFish < total) {
+					caughtFish = total;
+				}
+			}
+			
+			System.out.println("#" + testCase + " " + caughtFish);
+		}
 		
 	}
 
