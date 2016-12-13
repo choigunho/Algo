@@ -1,7 +1,11 @@
+package old;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 import java.io.FileInputStream;
 
-class Solution
+class Solution16
 {
     static int Answer;
     static int N;
@@ -40,15 +44,29 @@ class Solution
                 S2[i] = sc.next();
             }
             
-            /*
-             이곳에 여러분의 코드를 작성합니다.
-             테스트 케이스 개수 T만큼 각각의 결과가 Answer로 최종 출력 됩니다.
-            */
-            Answer = -1;
+            Answer = 0;
+            ////////////////////////
             
+            List<String> SS1; 
+            List<String> SS2; 
+            for(int i=0; i<N; i++) {
+            	SS1 = new ArrayList<>();
+            	SS2 = new ArrayList<>();
+            	if(S1[i].charAt(0) == S2[i].charAt(0) && S1[i].charAt(S1[i].length()-1) == S2[i].charAt(S2[i].length()-1)) {
+            		for(int j=1; j<S1[i].length()-1; j++) {
+            			SS1.add(S1[i].charAt(j) + "");
+            			SS2.add(S2[i].charAt(j) + "");
+            		}
+            		Collections.sort(SS1);
+            		Collections.sort(SS2);
+            		
+            		if(SS1.toString().equals(SS2.toString())) {
+            			Answer++;
+            		}
+            	}
+            }
             
-            
-            
+            ////////////////////////
             
             /* 결과 값 출력 */
             System.out.println("#" + test_case + " " + Answer);
