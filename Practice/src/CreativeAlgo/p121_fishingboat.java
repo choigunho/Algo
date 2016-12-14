@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
 
-public class fishingboat_p121 {
+public class p121_fishingboat {
 
 	static int Answer;
 
