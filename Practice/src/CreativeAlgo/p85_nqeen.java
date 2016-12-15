@@ -8,9 +8,10 @@ public class p85_nqeen {
 
 	static int Answer;
 	static int queen;
-	static int[] checkCol;
+	static int[] checkRow;
 	static int[] checkDesc;
 	static int[] checkAsc;
+	private static int count;
 	
 	public static void main(String args[]) throws Exception {
 		
@@ -25,7 +26,7 @@ public class p85_nqeen {
 			
 			queen = sc.nextInt();
 
-			checkCol = new int[queen];
+			checkRow = new int[queen+1];
 			checkDesc = new int[8];
 			checkAsc = new int[8];
 			
@@ -36,29 +37,47 @@ public class p85_nqeen {
 	}
 	
 	public static int dfs(int row, int col) {
-		
-		// 
-		
-		// col 체크, 1이면 백트레킹
-		if(checkCol[row] == 0) {
-			checkCol[row-1] = 1;
+//		System.out.println(row);
+		count += 1;
+
+		if(count == 4) {
+			System.out.println("ok");
 		}
 		
-		// \ 체크, 1이면 백트레킹
+		
+		if(row < queen) {
+			row += 1;
+
+			dfs(row, 1);
+		}
+		
+		/*
+		if(checkRow[row] == 0 && checkDesc[queen-(row-col)] == 0 && checkAsc[row+col] == 0) {
+			count += 1;
+			
+			checkRow[row-1] = 1; 		       // col 체크, 1이면 백트레킹
+			checkDesc[queen-(row-col)-1] = 1;  // \ 체크, 1이면 백트레킹
+			checkAsc[row+col-1] = 1;		   // / 체크, 1이면 백트레킹
+		}
+		
+		if(row < queen) {
+			row += 1;
+
+			dfs(row, 1);
+		}
+		*/
+
+		/*
 		if(checkDesc[queen-(row-col)] == 0) { // 4-(1-1)
 			checkDesc[queen-(row-col)-1] = 1;
 		}
-		
-		// / 체크, 1이면 백트레킹
-		if(checkAsc[row + col] == 0) {
-			checkAsc[row + col -1] = 1;
+
+		if(checkAsc[row+col] == 0) {
+			checkAsc[row+col-1] = 1;
 		}
+		*/
 		
 		
-		// 다음 row에서 탐색
-		
-		
-		
-		return 1;
+		return 0;
 	}
 }
