@@ -26,8 +26,8 @@ public class p85_nqeen {
 			queen = sc.nextInt();
 
 			checkCol = new int[queen+1];
-			checkDesc = new int[8];
-			checkAsc = new int[8];
+			checkDesc = new int[queen*queen];
+			checkAsc = new int[queen*queen];
 			
 			dfs(1);
 			
@@ -38,7 +38,6 @@ public class p85_nqeen {
 	public static void dfs(int row) {
 
 		if(row > queen) {
-			System.out.println("ok");
 			Answer++;
 			return;
 		}
