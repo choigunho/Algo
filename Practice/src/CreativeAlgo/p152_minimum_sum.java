@@ -10,6 +10,7 @@ public class p152_minimum_sum {
 	static int[] col;
 	static int[][] map;
 	static int N;
+	private static int total;
 	
 	public static void main(String args[]) throws Exception {
 		
@@ -27,6 +28,7 @@ public class p152_minimum_sum {
 			map = new int[N+1][N+1];
 			
 			Answer = 999;
+			total = 0;
 			
 			for(int i=1; i<=N; i++) {
 				for(int j=1; j<=N; j++) {
@@ -42,19 +44,24 @@ public class p152_minimum_sum {
 	
 	public static void dfs(int row) {
 
-//		int tmp = 0;
-		
 		if(row > N) {
-//			if(Answer > tmp) {
-//				Answer = tmp;
-//			}
-			return;
+			if(Answer > total) {
+				Answer = total;
+			}
 		}
 		
 		for(int i=1; i<=N; i++) {
 			if(col[i] == 0) {
+				col[i] = 1;
+				total += map[row][i];
 				
+				dfs(row + 1);
+				
+				col[i] = 0;
+				total -= map[row][i];
 			}
+			
 		}
+		
 	}
 }
