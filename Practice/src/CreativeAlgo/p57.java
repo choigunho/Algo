@@ -1,23 +1,24 @@
-package study;
+package CreativeAlgo;
 
-public class p53 {
+public class p57 {
 	
 	static int[] input = {1, 2, 3, 5, 7, 9, 11, 15}; //8
-	int find = 4;
+	int find = 6;
+	private int middleValue;
 	
 	public static void main(String[] args) {
 		
 		int start = 0;
-		int end = input.length; //8
+		int end = input.length + 1; //8
 		
-		p53 p = new p53();
+		p57 p = new p57();
 		System.out.println(p.solve(start, end));
 	}
 	
 	public int solve(int start, int end) {
 		
 		while(end-start >= 0) {
-			int middleValue = (end + start)/2;
+			middleValue = (end + start)/2;
 			
 			if(input[middleValue] == find) {
 				return middleValue + 1;
@@ -25,10 +26,10 @@ public class p53 {
 			if(input[middleValue] < find) {
 				start = middleValue+1;
 			} else {
-				end = middleValue-1;
+				end = middleValue;
 			}
 		}
-		return -1;
+		return input[middleValue];
 	}
 
 }

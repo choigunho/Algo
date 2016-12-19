@@ -1,4 +1,4 @@
-package study;
+package pastQuestion;
 
 import java.io.FileInputStream;
 import java.util.*;
@@ -70,7 +70,7 @@ public class vaccine {
 				return arr[1] + 1;
 			}
 
-			// ì—°ê²°ëœ ì‚¬ëŒë“¤ì„ íì— ë„£ëŠ”ë‹¤.			
+			// ?—°ê²°ëœ ?‚¬?Œ?“¤?„ ??— ?„£?Š”?‹¤.			
 			for(int i=1; i<totalPerson+1; i++) {
 				
 				if(map[arr[0]][i] == 1 && !personContainer.contains(i)) {
