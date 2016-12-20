@@ -42,13 +42,7 @@ public class forest_fire_watcher {
 						watcher = dfs(i, j); 
 						//System.out.println("watchers: " + watcher);
 						
-						if(watcher%2 == 1) {
-							Answer += (watcher + 1)/2;
-						} else if(watcher == 1) {
-							Answer += 1;
-						} else {
-							Answer += watcher/2;
-						}
+						Answer += (watcher + 1)/2;
 						
 						//System.out.println("required watcher: " + Answer);
 						watcher = 0;
