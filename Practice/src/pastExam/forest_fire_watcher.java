@@ -1,4 +1,4 @@
-package pastQuestion;
+package pastExam;
 
 import java.io.File;
 import java.io.FileInputStream;
