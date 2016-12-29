@@ -8,6 +8,7 @@ public class p100_maze {
 	static int Answer;
 	static int h, w;
 	private static char[][] map;
+	private static int count, result;
 	
 	public static void main(String args[]) throws Exception {
 		
@@ -20,94 +21,82 @@ public class p100_maze {
 		
 		for(int testCase = 0; testCase < T; testCase++) {
 			
+			System.out.println("###### testCase " + testCase + " ############");
+			
 			h = sc.nextInt();
 			w = sc.nextInt();
 			
-			map = new char[h+1][w+1];
-			for(int i=0; i<h; i++) {
+			map = new char[h+2][w+2];
+			for(int i=1; i<=h; i++) {
 				String line = sc.next();
-				for(int j=0; j<w; j++) {
-					map[i][j] = line.charAt(j);
+				for(int j=1; j<=w; j++) {
+					map[i][j] = line.charAt(j-1);
 				}
 			}
+			count = 0;
+			result = 999;
+			dfs(1, 2);
 			
-			dfs(0, 1);
-			
-			System.out.println("#" + testCase + " " + Answer);
+			if(result == 999) {
+				result = 0;
+			}
+			System.out.println("#" + testCase + " " + (result-1));
 		}
 	}
 	
 	public static void dfs(int row, int col) {
 		
+		count++;
+		System.out.println(row + " " + col + " count: " + count);
+		
 		if(map[row][col] == 'G') {
-			System.out.println("dfdfd");
+			System.out.println("reached! count: " + count);
+			if(result > count) {
+				result = count;
+			}
 		}
 		
 		map[row][col] = 'x';
-		
-		
-		
-			if(map[row+1][col] == '.' || map[row-1][col] == '.' || map[row][col+1] == '.' || map[row][col-1] == '.') {
-				System.out.println(row+1 + " " + col);
-				System.out.println(row-1 + " " + col);
-				System.out.println(row + " " + (col+1));
-				System.out.println(row + " " + (col-1));
-				dfs(row+1, col);
-				dfs(row-1, col);
-				dfs(row, col+1);
-				dfs(row, col-1);
 				
-				map[row+1][col] = '.';
-				map[row-1][col] = '.';
-				map[row][col+1] = '.';
-				map[row][col-1] = '.';
-				
-			} else if(map[row+1][col] == 'G') {
-				System.out.println("bingo!");
-				return;
-			}
-		
-				
-		/*
-		if(row+1 < h) {
-			if(map[row+1][col] == '.') {
-				System.out.println(row+1 + " " + col);
-				dfs(row+1, col);
-				
-				map[row+1][col] = '.';
-			} else if(map[row+1][col] == 'G') {
-				System.out.println("bingo!");
-				return;
-			}
+		if(map[row+1][col] == '.') {
+			dfs(row+1, col);
+			map[row+1][col] = '.';
+			count--;
+		} else if(map[row+1][col] == 'G') {
+			dfs(row+1, col);
+			map[row+1][col] = 'G';
+			count--;
+		}
+	
+		if(map[row-1][col] == '.') {
+			dfs(row-1, col);
+			map[row-1][col] = '.';
+			count--;
+		} else if(map[row-1][col] == 'G') {
+			dfs(row-1, col);
+			map[row-1][col] = 'G';
+			count--;
 		}
 		
-		if(row-1 > h) {
-			if(map[row-1][col] == '.') {
-				System.out.println(row-1 + " " + col);
-				dfs(row-1, col);
-				
-				map[row-1][col] = '.';
-			}
+		if(map[row][col+1] == '.') {
+			dfs(row, col+1);
+			map[row][col+1] = '.';
+			count--;
+		} else if(map[row][col+1] == 'G') {
+			dfs(row, col+1);
+			map[row][col+1] = 'G';
+			count--;
 		}
-			
-		if(col+1 < w) {
-			if(map[row][col+1] == '.') {
-				System.out.println(row + " " + (col+1));
-				dfs(row, col+1);
-				
-				map[row][col+1] = '.';
-			}
-		}	
-			
-		if(col-1 > w) {
-			if(map[row][col-1] == '.') {
-				System.out.println(row + " " + (col-1));
-				dfs(row, col-1);
-				
-				map[row][col-1] = '.';
-			}
-		}	
-		*/
+		
+		if(map[row][col-1] == '.') {
+			dfs(row, col-1);
+			map[row][col-1] = '.';
+			count--;
+		} else if(map[row][col-1] == 'G') {
+			dfs(row, col-1);
+			map[row][col-1] = 'G';
+			count--;
+		}
 		
 	}
 	
