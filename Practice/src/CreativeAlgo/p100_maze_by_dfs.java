@@ -3,7 +3,7 @@ package CreativeAlgo;
 import java.io.FileInputStream;
 import java.util.*;
 
-public class p100_maze {
+public class p100_maze_by_dfs {
 
 	static int Answer;
 	static int h, w;
@@ -12,7 +12,7 @@ public class p100_maze {
 	
 	public static void main(String args[]) throws Exception {
 		
-		String path = p100_maze.class.getResource("").getPath();
+		String path = p100_maze_by_dfs.class.getResource("").getPath();
 		String fileName = "p100_maze.txt";
 		System.setIn(new FileInputStream(path + fileName));
 		
