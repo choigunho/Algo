@@ -8,7 +8,6 @@ public class p100_maze_by_bfs {
 	static int Answer;
 	static int h, w;
 	private static char[][] map;
-	private static int count, result;
 	
 	public static void main(String args[]) throws Exception {
 		
@@ -19,7 +18,7 @@ public class p100_maze_by_bfs {
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
 		
-		for(int testCase = 0; testCase < T; testCase++) {
+		for(int testCase = 1; testCase <= T; testCase++) {
 			
 			System.out.println("###### testCase " + testCase + " ############");
 			
@@ -33,71 +32,37 @@ public class p100_maze_by_bfs {
 					map[i][j] = line.charAt(j-1);
 				}
 			}
-			count = 0;
-			result = 999;
-			dfs(1, 2);
 			
-			if(result == 999) {
-				result = 0;
-			}
-			System.out.println("#" + testCase + " " + (result-1));
-		}
-	}
-	
-	public static void dfs(int row, int col) {
-		
-		count++;
-		System.out.println(row + " " + col + " count: " + count);
-		
-		if(map[row][col] == 'G') {
-			System.out.println("reached! count: " + count);
-			if(result > count) {
-				result = count;
-			}
-		}
-		
-		map[row][col] = 'x';
+			Queue<int[]> q = new LinkedList<int[]>();
+			q.add(new int[]{1, 2, 0});
+			
+			while(true) {
+				int[] arr = q.remove();
 				
-		if(map[row+1][col] == '.') {
-			dfs(row+1, col);
-			map[row+1][col] = '.';
-			count--;
-		} else if(map[row+1][col] == 'G') {
-			dfs(row+1, col);
-			map[row+1][col] = 'G';
-			count--;
+				if(map[arr[0]][arr[1]] == 'G') {
+					//System.out.println(arr[0] + " " + arr[1] + " " + arr[2]);
+					Answer = arr[2];
+					break;
+				}
+				map[arr[0]][arr[1]] = 'x';
+				
+				if(map[arr[0]-1][arr[1]] == '.' || map[arr[0]-1][arr[1]] == 'G') {
+					q.add(new int[]{arr[0]-1, arr[1], arr[2]+1});
+				}
+				if(map[arr[0]+1][arr[1]] == '.' || map[arr[0]+1][arr[1]] == 'G') {
+					q.add(new int[]{arr[0]+1, arr[1], arr[2]+1});
+				}
+				if(map[arr[0]][arr[1]-1] == '.' || map[arr[0]][arr[1]-1] == 'G') {
+					q.add(new int[]{arr[0], arr[1]-1, arr[2]+1});
+				}
+				if(map[arr[0]][arr[1]+1] == '.' || map[arr[0]][arr[1]+1] == 'G') {
+					q.add(new int[]{arr[0], arr[1]+1, arr[2]+1});
+				}
+			}
+			
+			System.out.println("#" + testCase + " " + Answer);
 		}
-	
-		if(map[row-1][col] == '.') {
-			dfs(row-1, col);
-			map[row-1][col] = '.';
-			count--;
-		} else if(map[row-1][col] == 'G') {
-			dfs(row-1, col);
-			map[row-1][col] = 'G';
-			count--;
-		}
-		
-		if(map[row][col+1] == '.') {
-			dfs(row, col+1);
-			map[row][col+1] = '.';
-			count--;
-		} else if(map[row][col+1] == 'G') {
-			dfs(row, col+1);
-			map[row][col+1] = 'G';
-			count--;
-		}
-		
-		if(map[row][col-1] == '.') {
-			dfs(row, col-1);
-			map[row][col-1] = '.';
-			count--;
-		} else if(map[row][col-1] == 'G') {
-			dfs(row, col-1);
-			map[row][col-1] = 'G';
-			count--;
-		}
-		
 	}
+	
 	
 }
