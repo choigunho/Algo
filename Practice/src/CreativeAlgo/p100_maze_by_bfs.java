@@ -39,24 +39,28 @@ public class p100_maze_by_bfs {
 			while(true) {
 				int[] arr = q.remove();
 				
+				int row = arr[0];
+				int col = arr[1];
+				int count = arr[2];
+				
 				if(map[arr[0]][arr[1]] == 'G') {
 					//System.out.println(arr[0] + " " + arr[1] + " " + arr[2]);
-					Answer = arr[2];
+					Answer = count;
 					break;
 				}
-				map[arr[0]][arr[1]] = 'x';
+				map[row][col] = 'x';
 				
-				if(map[arr[0]-1][arr[1]] == '.' || map[arr[0]-1][arr[1]] == 'G') {
-					q.add(new int[]{arr[0]-1, arr[1], arr[2]+1});
+				if(map[row-1][col] == '.' || map[row-1][col] == 'G') {
+					q.add(new int[]{row-1, col, count+1});
 				}
-				if(map[arr[0]+1][arr[1]] == '.' || map[arr[0]+1][arr[1]] == 'G') {
-					q.add(new int[]{arr[0]+1, arr[1], arr[2]+1});
+				if(map[row+1][col] == '.' || map[row+1][col] == 'G') {
+					q.add(new int[]{row+1, col, count+1});
 				}
-				if(map[arr[0]][arr[1]-1] == '.' || map[arr[0]][arr[1]-1] == 'G') {
-					q.add(new int[]{arr[0], arr[1]-1, arr[2]+1});
+				if(map[row][col-1] == '.' || map[row][col-1] == 'G') {
+					q.add(new int[]{row, col-1, count+1});
 				}
-				if(map[arr[0]][arr[1]+1] == '.' || map[arr[0]][arr[1]+1] == 'G') {
-					q.add(new int[]{arr[0], arr[1]+1, arr[2]+1});
+				if(map[row][col+1] == '.' || map[row][col+1] == 'G') {
+					q.add(new int[]{row, col+1, count+1});
 				}
 			}
 			
