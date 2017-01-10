@@ -1,4 +1,4 @@
-package CreativeAlgo;
+package algorithm_md;
 
 import java.io.File;
 import java.io.FileInputStream;

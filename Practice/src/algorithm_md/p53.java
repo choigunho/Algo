@@ -1,4 +1,4 @@
-package CreativeAlgo;
+package algorithm_md;
 
 public class p53 {
 	
