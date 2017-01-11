@@ -1,4 +1,5 @@
 package algorithm_ad;
+// web
 
 public class p7 {
 	
