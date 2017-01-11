@@ -18,11 +18,20 @@ public class p108_sum_of_aliquot_part {
 		
 		for(int testCase = 1; testCase <= T; testCase++) {
 			
+			int n = sc.nextInt();
+			int sum = 0;
 			
+			for(int i=2; i<=n/2; i++) {
+				
+				if(n%i == 0) {
+					//System.out.println(i);
+					sum += i;
+				}
+			}
 			
+			Answer = sum + n + 1;
 			System.out.println("#" + testCase + " " + Answer);
 		}
 	}
-	
-	
+
 }
