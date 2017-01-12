@@ -6,20 +6,18 @@ import java.util.*;
 public class p96_mole_tunnel {
 
 	static int Answer;
-	static int[][] map;
-	static List<Integer> l;
-	private static int count;
+	private static int[][] map;
 	
 	public static void main(String args[]) throws Exception {
 		
 		String path = p96_mole_tunnel.class.getResource("").getPath();
-		String fileName = "p96_mole_tunnel.txt";
+		String fileName = "p77.txt";
 		System.setIn(new FileInputStream(path + fileName));
 		
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
 		
-		for(int testCase = 0; testCase < T; testCase++) {
+		for(int testCase = 1; testCase <= T; testCase++) {
 			
 			int area = sc.nextInt();
 			map = new int[area+2][area+2];
@@ -30,42 +28,51 @@ public class p96_mole_tunnel {
 				}
 			}
 			
-			l = new ArrayList<Integer>();
-			for(int i=1; i<= area; i++) {
-				for(int j=1; j<= area; j++) {
-					if(map[i][j] == 1) {
-						dfs(i, j);
-//						System.out.println("count: " + count);
-						
-						l.add(count);
-						
-						count = 0;
+			for(int i=1; i<=area; i++) {
+				for(int j=1; j<=area; j++) {
+					if(map[i][j]==1) {
+						bfs(i, j);
 					}
 				}
 			}
 			
-			l.sort(null);
-			Answer = l.size();
-			System.out.println("#" + testCase + " " + Answer + " " + l);
+			System.out.println("#" + testCase + " " + Answer);
 		}
 	}
-	
-	public static void dfs(int r, int c) {
+
+	private static int bfs(int i, int j) {
 		
-		if(map[r][c] == 1) {
-//			System.out.println(r + " " + c);
-			count++;
-			map[r][c] = 0;
+		Queue<int[]> q = new LinkedList<int[]>();
+		q.add(new int[]{i, j});
+		
+		int count = 0;
+		while(true) {
 			
-			if(map[r+1][c] == 1 || map[r-1][c] == 1 || map[r][c+1] == 1 || map[r][c-1] == 1) {
-				dfs(r+1, c);
-				dfs(r-1, c);
-				dfs(r, c+1);
-				dfs(r, c-1);
+			if(q.isEmpty()) {
+				System.out.println("break " + count);
+				return count;
 			}
 			
+			int[] tmp = q.remove();
+			
+			if(map[tmp[0]+1][j]==1) {
+				q.add(new int[]{i+1, j});
+				map[i+1][j] = 0; count++;
+			}
+			if(map[i-1][j]==1) {
+				q.add(new int[]{i-1, j});
+				map[i-1][j] = 0; count++;
+			}
+			if(map[i][j+1]==1) {
+				q.add(new int[]{i, j+1});
+				map[i][j+1] = 0; count++;
+			}
+			if(map[i][j-1]==1) {
+				q.add(new int[]{i, j-1});
+				map[i][j-1] = 0; count++;
+			}
 		}
 		
 	}
-	
+
 }
