@@ -31,7 +31,7 @@ public class p96_mole_tunnel {
 			for(int i=1; i<=area; i++) {
 				for(int j=1; j<=area; j++) {
 					if(map[i][j]==1) {
-						bfs(i, j);
+						bfs(i, j, 0);
 					}
 				}
 			}
@@ -40,10 +40,10 @@ public class p96_mole_tunnel {
 		}
 	}
 
-	private static int bfs(int i, int j) {
+	private static int bfs(int i, int j, int c) {
 		
 		Queue<int[]> q = new LinkedList<int[]>();
-		q.add(new int[]{i, j});
+		q.add(new int[]{i, j, c});
 		
 		int count = 0;
 		while(true) {
@@ -53,23 +53,25 @@ public class p96_mole_tunnel {
 				return count;
 			}
 			
-			int[] tmp = q.remove();
 			
-			if(map[tmp[0]+1][j]==1) {
-				q.add(new int[]{i+1, j});
-				map[i+1][j] = 0; count++;
+			int[] tmp = q.remove();
+			map[tmp[0]][tmp[1]] = 0;
+			
+			if(map[tmp[0]+1][tmp[1]]==1) {
+				q.add(new int[]{tmp[0]+1, tmp[1], count++});
+				map[tmp[0]+1][tmp[1]] = 0; //count++;
 			}
-			if(map[i-1][j]==1) {
-				q.add(new int[]{i-1, j});
-				map[i-1][j] = 0; count++;
+			if(map[tmp[0]-1][tmp[1]]==1) {
+				q.add(new int[]{tmp[0]-1, tmp[1], count++});
+				map[tmp[0]-1][tmp[1]] = 0; //count++;
 			}
-			if(map[i][j+1]==1) {
-				q.add(new int[]{i, j+1});
-				map[i][j+1] = 0; count++;
+			if(map[tmp[0]][tmp[1]+1]==1) {
+				q.add(new int[]{tmp[0], tmp[1]+1, count++});
+				map[tmp[0]][tmp[1]+1] = 0; //count++;
 			}
-			if(map[i][j-1]==1) {
-				q.add(new int[]{i, j-1});
-				map[i][j-1] = 0; count++;
+			if(map[tmp[0]][tmp[1]-1]==1) {
+				q.add(new int[]{tmp[0], tmp[1]-1, count++});
+				map[tmp[0]][tmp[1]-1] = 0; //count++;
 			}
 		}
 		

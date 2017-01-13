@@ -13,7 +13,7 @@ public class p77_mole_tunnel {
 	public static void main(String args[]) throws Exception {
 		
 		String path = p77_mole_tunnel.class.getResource("").getPath();
-		String fileName = "p96_mole_tunnel.txt";
+		String fileName = "p77.txt";
 		System.setIn(new FileInputStream(path + fileName));
 		
 		Scanner sc = new Scanner(System.in);
