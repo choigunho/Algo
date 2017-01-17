@@ -22,7 +22,19 @@ public class p115_triangle_flower_bed {
 			int Answer = 0;
 			
 			
-			// 두 번째 풀이 : 2 ms, 128 ms
+			
+			// #4
+			
+			
+			
+			
+			/*
+			// #3
+			dfs(n, 1, 1, 1);
+			*/
+			
+			/*
+			// #2 : 0 ms, 4 ms, 75 ms
 			long start_time = System.currentTimeMillis();
 			for(int a=1; a<=n; a++) {
 				for(int b=a; b<=n; b++) {
@@ -30,15 +42,16 @@ public class p115_triangle_flower_bed {
 					
 					if((c>=b) && ((a+b)>c)) {
 						Answer++;
-						System.out.println(a + " " + b + " " + c);
+						//System.out.println(a + " " + b + " " + c);
 					}
 				}
 			}
 			long end_time = System.currentTimeMillis();
 			System.out.println("경과 시간: " + (end_time - start_time) + " ms");
+			*/
 			
-			/* 
-			// 첫 번째 풀이 : 4 ms, 382 ms
+			/*
+			// #1 : 2 ms, 254 ms, 
 			long start_time = System.currentTimeMillis();
 			for(int a=1; a<=n; a++) {
 				for(int b=a; b<=n; b++) {
@@ -46,7 +59,7 @@ public class p115_triangle_flower_bed {
 						
 						if((a+b+c)==n && ((a+b)>c)) {
 							Answer++;
-							System.out.println(a + " " + b + " " + c);
+							//System.out.println(a + " " + b + " " + c);
 						}
 					}
 				}
@@ -57,6 +70,19 @@ public class p115_triangle_flower_bed {
 			
 			System.out.println("#" + testCase + " " + Answer);
 		}
+	}
+	
+	public static void dfs(int n, int a, int b, int c) {
+		if(a+b+c==n) {
+			if(a<=b && b<=c && a+b>c) {
+				Answer++;
+				return;
+			}
+			
+		}
+		dfs(n, a+1, b, c);
+		dfs(n, a, b+1, c);
+		dfs(n, a, b, c+1);
 	}
 
 }
