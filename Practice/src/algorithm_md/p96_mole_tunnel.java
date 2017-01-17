@@ -28,6 +28,7 @@ public class p96_mole_tunnel {
 				}
 			}
 			
+			Answer = 0;
 			for(int i=1; i<=area; i++) {
 				for(int j=1; j<=area; j++) {
 					if(map[i][j]==1) {
@@ -40,17 +41,18 @@ public class p96_mole_tunnel {
 		}
 	}
 
-	private static int bfs(int i, int j, int c) {
+	private static void bfs(int i, int j, int c) {
 		
 		Queue<int[]> q = new LinkedList<int[]>();
 		q.add(new int[]{i, j, c});
 		
-		int count = 0;
+		int count = 1;
 		while(true) {
 			
 			if(q.isEmpty()) {
 				System.out.println("break " + count);
-				return count;
+				Answer++;
+				break;
 			}
 			
 			
