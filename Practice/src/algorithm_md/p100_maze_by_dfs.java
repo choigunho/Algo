@@ -13,7 +13,7 @@ public class p100_maze_by_dfs {
 	public static void main(String args[]) throws Exception {
 		
 		String path = p100_maze_by_dfs.class.getResource("").getPath();
-		String fileName = "p100_maze.txt";
+		String fileName = "p100.txt";
 		System.setIn(new FileInputStream(path + fileName));
 		
 		Scanner sc = new Scanner(System.in);
