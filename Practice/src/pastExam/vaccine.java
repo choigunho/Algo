@@ -16,9 +16,11 @@ public class vaccine {
 	
 	public static void main(String args[]) throws Exception {
 		
-		System.setIn(new FileInputStream("C:\\vaccine.txt"));
-		Scanner sc = new Scanner(System.in);
+		String path = vaccine.class.getResource("").getPath();
+		String fileName = "vaccine.txt";
+		System.setIn(new FileInputStream(path + fileName));
 		
+		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
 		
 		for(int testCase = 0; testCase < T; testCase++) {

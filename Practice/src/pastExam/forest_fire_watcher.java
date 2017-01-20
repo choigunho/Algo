@@ -1,6 +1,5 @@
 package pastExam;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
 
@@ -12,8 +11,9 @@ public class forest_fire_watcher {
 
 	public static void main(String args[]) throws Exception {
 		
-//		System.setIn(new FileInputStream("C:\\forest_fire_watcher.txt"));
-		System.setIn(new FileInputStream(new File("").getAbsolutePath() + "\\res\\forest_fire_watcher.txt"));
+		String path = forest_fire_watcher.class.getResource("").getPath();
+		String fileName = "forest_fire_watcher.txt";
+		System.setIn(new FileInputStream(path + fileName));
 		
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();

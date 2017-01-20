@@ -1,6 +1,5 @@
 package algorithm_md;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
 
@@ -14,9 +13,10 @@ public class p152_minimum_sum {
 	
 	public static void main(String args[]) throws Exception {
 		
-		String path = new File("").getAbsoluteFile() + "\\res\\";
-		String fileName = "p152_minimum_sum.txt";
+		String path = p152_minimum_sum.class.getResource("").getPath();
+		String fileName = "p152.txt";
 		System.setIn(new FileInputStream(path + fileName));
+		
 		
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();

@@ -1,6 +1,5 @@
 package algorithm_md;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
 
@@ -14,9 +13,10 @@ public class p85_nqeen {
 	
 	public static void main(String args[]) throws Exception {
 		
-		String path = new File("").getAbsoluteFile() + "\\res\\";
-		String fileName = "p85_nqeen.txt";
+		String path = p85_nqeen.class.getResource("").getPath();
+		String fileName = "p85.txt";
 		System.setIn(new FileInputStream(path + fileName));
+		
 		
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
