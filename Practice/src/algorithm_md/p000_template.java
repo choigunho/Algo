@@ -22,6 +22,9 @@ public class p000_template {
 			
 			
 			
+			
+			
+			
 			System.out.println("#" + testCase + " " + Answer);
 		}
 	}
