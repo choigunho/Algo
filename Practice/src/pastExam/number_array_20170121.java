@@ -24,8 +24,10 @@ public class number_array_20170121 {
 			N = sc.nextInt();
 			isVisit = new int[N+1];
 			
-			depth = 1;
-			dfs(1);
+			depth = 0;
+			Answer = 0;
+			
+			dfs(0);
 			
 			System.out.println("#" + testCase + " " + Answer);
 		}
@@ -33,11 +35,10 @@ public class number_array_20170121 {
 
 	private static void dfs(int currentNum) {
 		
-		System.out.println(currentNum + " " + depth);
+		//System.out.println(currentNum + " " + depth);
 		isVisit[currentNum] = 1;
 		
 		if(depth == N) {
-			System.out.println("end!!!");
 			Answer++;
 			return;
 		}
@@ -45,13 +46,12 @@ public class number_array_20170121 {
 		for(int i=1; i<=N; i++) {
 
 			if(isVisit[i] == 0) {
+				depth++;
 				if(i == depth || i == depth-1 || i == depth+1) {
-					depth++;
 					dfs(i);
-					depth--;
 					isVisit[i] = 0;
-				
 				}
+				depth--;
 			}
 			
 		}
