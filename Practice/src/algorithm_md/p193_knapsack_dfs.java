@@ -3,12 +3,11 @@ package algorithm_md;
 import java.io.FileInputStream;
 import java.util.*;
 
-public class p193_knapsack {
+public class p193_knapsack_dfs {
 
 	static int Answer;
 	private static int totalStuff;
 	private static int maxWeight;
-	private static int count;
 	private static int[] isVisit;
 	private static int[] weight;
 	private static int[] value;
@@ -17,7 +16,7 @@ public class p193_knapsack {
 	
 	public static void main(String args[]) throws Exception {
 		
-		String path = p193_knapsack.class.getResource("").getPath();
+		String path = p193_knapsack_dfs.class.getResource("").getPath();
 		String fileName = "p193.txt";
 		System.setIn(new FileInputStream(path + fileName));
 		
@@ -39,10 +38,11 @@ public class p193_knapsack {
 			}
 			
 			isVisit = new int[totalStuff + 1];
-			accWeight = weight[1];
-			accValue = value[1];
+			
+			accWeight = weight[0];
+			accValue = value[0];
 			Answer = -1;
-			dfs(1);
+			dfs(0);
 			
 			System.out.println("#" + testCase + " " + Answer);
 		}
@@ -53,6 +53,7 @@ public class p193_knapsack {
 		isVisit[itemNum] = 1;
 		System.out.printf("무게:%s 가격:%s 누적 무게:%s 누적 가격:%s\n", weight[itemNum], value[itemNum], accWeight, accValue);
 		
+		// 배낭 무게를 넘지 않으면 누적 가격을 Answer로 저장
 		if(accWeight <= maxWeight) {
 			System.out.println("ok");
 			if(Answer < accValue) {
@@ -65,11 +66,9 @@ public class p193_knapsack {
 		
 		for(int i=1; i<=totalStuff; i++) {
 			if(isVisit[i] == 0) {
-				count++;
 				accWeight+=weight[i];
 				accValue+=value[i];
 				dfs(i);
-				count--;
 				accWeight-=weight[i];
 				accValue-=value[i];
 				isVisit[i] = 0;
